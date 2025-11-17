@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useRef } from 'react'
 
 const Reducer = () => {
     /** 
@@ -8,18 +8,21 @@ const Reducer = () => {
      * useReducer uses a reducer state function to update state based on dispatched actions.
      */
 
+  const initialState = { email: "", password: "" };
+
   const reducer = (state, action) => {
+    
     switch(action.type){
-      case "SET_EMAIL":
+      case "EMAIL":
         return {...state,email: action.payload}
-      case "SET_PASS":
+      case "PASS":
         return {...state,password: action.payload}
       default:
         return state
     }
   }
 
-  const initialState = { email: "", password: "" };
+  
   const [state, dispatch] = useReducer(reducer, initialState);
 
     
@@ -31,10 +34,12 @@ const Reducer = () => {
         <input style={styles.input}
           type="email" placeholder='Email' onChange={(e) => dispatch({type: "EMAIL", payload: e.target.value})}
         />
+        <h1>Email: {state.email}</h1>
 
         <input style={styles.input}
           type="password" placeholder='Password' onChange={(e) => dispatch({type: "PASS", payload: e.target.value})}                 
         />
+        <h1>Password: {state.password}</h1>
 
       </form>
     </div>
